@@ -25,7 +25,6 @@ export default function App() {
 						setIsClicked={setIsClicked}
 						setName={setName}
 					>
-						<button>click!</button>
 						<div>
 							<label htmlFor='name'>Name:</label>
 							<input
@@ -34,8 +33,6 @@ export default function App() {
 								onChange={(event) => setName(event.target.value)}
 							/>
 						</div>
-
-						<div onClick={() => console.log('heyyy !')}>Click div</div>
 					</Modal>
 				) : null}
 			</header>
@@ -52,8 +49,8 @@ function Modal({ isClicked, setIsClicked, children }) {
 	return (
 		<div>
 			<p>This is a Modal!</p>
-			<button onClick={(event) => handleClick(event)}>Remove Modal!</button>
 			{children}
+			<button onClick={(event) => handleClick(event)}>Remove Modal!</button>
 		</div>
 	);
 }
