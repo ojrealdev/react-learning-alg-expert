@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-const App = () => {
+export default function App() {
 	const [isClicked, setIsClicked] = useState(false);
 
 	const setClick = (msg) => {
@@ -26,14 +26,19 @@ const App = () => {
 			</header>
 		</div>
 	);
-};
+}
 
-const Modal = ({ isClicked, setIsClicked, children }) => (
-	<div>
-		<p>This is a Modal!</p>
-		<button onClick={() => setIsClicked(false)}>Remove Modal!</button>
-		{children}
-	</div>
-);
+function Modal({ isClicked, setIsClicked, children }) {
+	const handleClick = (event) => {
+		console.log(event);
+		setIsClicked(false);
+	};
 
-export default App;
+	return (
+		<div>
+			<p>This is a Modal!</p>
+			<button onClick={(event) => handleClick(event)}>Remove Modal!</button>
+			{children}
+		</div>
+	);
+}
