@@ -3,6 +3,7 @@ import './App.css';
 
 export default function App() {
 	const [isClicked, setIsClicked] = useState(false);
+	const [name, setName] = useState('John!');
 
 	const setClick = (msg) => {
 		alert(msg);
@@ -12,6 +13,9 @@ export default function App() {
 	return (
 		<div className='App-header'>
 			<header className='App-header'>
+				<section>
+					<header>Welcome {name}</header>
+				</section>
 				<h1>A Modal will appear if you click the button below</h1>
 				<button onClick={() => setClick('hello world!')}>Create Modal</button>
 				{isClicked ? (
@@ -19,8 +23,19 @@ export default function App() {
 						className='modal'
 						isClicked={isClicked}
 						setIsClicked={setIsClicked}
+						setName={setName}
 					>
 						<button>click!</button>
+						<div>
+							<label htmlFor='name'>Name:</label>
+							<input
+								placeholder='Enter name'
+								id='name'
+								onChange={(event) => setName(event.target.value)}
+							/>
+						</div>
+
+						<div onClick={() => console.log('heyyy !')}>Click div</div>
 					</Modal>
 				) : null}
 			</header>
