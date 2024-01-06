@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import './App.css';
 
 export default function App() {
 	const [isClicked, setIsClicked] = useState(false);
-	const [name, setName] = useState('John!');
+	const [name, setName] = useState('John');
 	const [count, setCount] = useState(0);
 
 	useEffect(() => {}, []);
@@ -28,24 +28,28 @@ export default function App() {
 						isClicked={isClicked}
 						setIsClicked={setIsClicked}
 						setName={setName}
+						name={name}
 						setCount={setCount}
 					>
 						<div>
 							<label htmlFor='name'>Name:</label>
 							<input
-								placeholder='Enter name'
+								placeholder={'Enter name'}
 								id='name'
+								value={name}
 								onChange={(event) => setName(event.target.value)}
 							/>
 						</div>
 					</Modal>
 				) : null}
+				<hr />
+				<Counter />
 			</header>
 		</div>
 	);
 }
 
-function Modal({ isClicked, setIsClicked, setCount, children }) {
+function Modal({ name, setIsClicked, setCount, children }) {
 	const handleClick = (event) => {
 		console.log(event);
 		setIsClicked(false);
@@ -63,6 +67,31 @@ function Modal({ isClicked, setIsClicked, setCount, children }) {
 			{children}
 			<button onClick={(event) => handleClick(event)}>Remove Modal!</button>
 			<button onClick={handleAddCount}>Add Count</button>
+		</div>
+	);
+}
+
+function Counter() {
+	const reducer = (state, action) => {
+		switch (action.type) {
+			case 'increment':
+				return { num: state.num + action.num };
+			case 'decrement':
+				return { num: state.num - 1 };
+			default:
+				return { num: state.num };
+		}
+	};
+
+	const [state, dispatch] = useReducer(reducer, { num: 1 });
+
+	return (
+		<div>
+			<div>Count is : {state.num} </div>
+			<div onClick={() => dispatch({ type: 'increment', num: 2 })}>
+				Incremente
+			</div>
+			<div onClick={() => dispatch({ type: 'decrement' })}>Decremente</div>
 		</div>
 	);
 }
