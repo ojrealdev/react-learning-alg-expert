@@ -72,17 +72,6 @@ function Modal({ name, setIsClicked, setCount, children }) {
 }
 
 function Counter() {
-	const reducer = (state, action) => {
-		switch (action.type) {
-			case 'increment':
-				return { num: state.num + action.num };
-			case 'decrement':
-				return { num: state.num - 1 };
-			default:
-				return { num: state.num };
-		}
-	};
-
 	const [state, dispatch] = useReducer(reducer, { num: 1 });
 
 	return (
@@ -95,3 +84,14 @@ function Counter() {
 		</div>
 	);
 }
+
+const reducer = (state, action) => {
+	switch (action.type) {
+		case 'increment':
+			return { num: state.num + action.num };
+		case 'decrement':
+			return { num: state.num - 1 };
+		default:
+			return { num: state.num };
+	}
+};
